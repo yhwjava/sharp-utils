@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.sharp.utils.printparam.starter.PrintParamAutoConfigure
+com.sharp.utils.printparam.starter.PrintParamAutoConfigure,\
+com.sharp.utils.redisson.configuration.RedissonConfiguration

@@ -9,28 +9,37 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-
+/**
+ * <p>Title: FileUtil</p>
+ * <p>Description: 时间日期操作工具类</p>
+ * <p>Copyright: Copyright (c) 2019</p>
+ *
+ * @author yuanhongwei
+ * @version 1.0 2019-6-30 下午6:48:33 【初版】
+ */
 public class DateUtil {
-	private static final Logger logger = LoggerFactory.getLogger(DateUtil.class);
-	
+    private static final Logger logger = LoggerFactory.getLogger(DateUtil.class);
+
     private static final String DATE_PATTERN = "yyyy-MM-dd";
     private static final String DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
-    
-	/**
-	 * 获取当前时间
-	 * @return 当前日期
-	 */
-	public static Timestamp getNowTime() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat(DATETIME_PATTERN);
-		Timestamp nowTime = Timestamp.valueOf(dateFormat.format(new Date()));
-		return nowTime;
-	}
-	
-	
+
+    /**
+     * 获取当前时间
+     *
+     * @return 当前日期
+     */
+    public static Timestamp getNowTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATETIME_PATTERN);
+        Timestamp nowTime = Timestamp.valueOf(dateFormat.format(new Date()));
+        return nowTime;
+    }
+
+
     /**
      * 获取当前系统时间.
      * 默认模板格式yyyy-MM-dd hh:mm:ss.
+     *
      * @return 当前系统时间
      */
     public static String getCurrentDateTime() {
@@ -39,6 +48,7 @@ public class DateUtil {
 
     /**
      * 获取当前系统同期。
+     *
      * @return 当前系统日期
      * @author zhenggz 2003-11-09
      */
@@ -48,7 +58,8 @@ public class DateUtil {
 
     /**
      * 获取当前系统时间.
-     * @param strPattern 时间模板
+     *
+     * @param pattern 时间模板
      * @return 当前系统时间
      */
     public static String getCurrentDateTime(String pattern) {
@@ -62,7 +73,7 @@ public class DateUtil {
     }
 
     public static Date getDate(String dateStr, String pattern) throws
-        ParseException {
+            ParseException {
         Date date = null;
         SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
         date = dateFormat.parse(dateStr);
@@ -90,28 +101,28 @@ public class DateUtil {
         return hour;
     }
 
-    public static long secsOf2Day(String day1,String day2){
-        try{
+    public static long secsOf2Day(String day1, String day2) {
+        try {
             Date date1 = getDate(day1);
             Date date2 = getDate(day2);
-            long secs=Math.abs(date1.getTime()-date2.getTime())/1000;
+            long secs = Math.abs(date1.getTime() - date2.getTime()) / 1000;
             return secs;
-        }catch(Exception e){
+        } catch (Exception e) {
             return -1;
         }
     }
-	
-	
-	public static String getDateBefore(String datetimes,int day){
-		   Calendar now =Calendar.getInstance(); 
-		   try{
-			   now.setTime(getDate(datetimes));
-		   }catch (ParseException e) {
-				logger.error("时间格式 [ " + datetimes + " ]  无法被解析："+e.toString());
-				return null;
-		   }
-		   now.set(Calendar.DATE,now.get(Calendar.DATE)-day);
-		   return getString(now.getTime(),DATETIME_PATTERN);
-	}
+
+
+    public static String getDateBefore(String datetimes, int day) {
+        Calendar now = Calendar.getInstance();
+        try {
+            now.setTime(getDate(datetimes));
+        } catch (ParseException e) {
+            logger.error("时间格式 [ " + datetimes + " ]  无法被解析：" + e.toString());
+            return null;
+        }
+        now.set(Calendar.DATE, now.get(Calendar.DATE) - day);
+        return getString(now.getTime(), DATETIME_PATTERN);
+    }
 
 }

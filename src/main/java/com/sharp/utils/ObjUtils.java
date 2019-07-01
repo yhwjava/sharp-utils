@@ -9,11 +9,12 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * <p>Title: ObjUtils</p>
- * <p>Description: 各种常用util集合，Object的判空，唯一id的生成，证件脱敏。。</p>
+ * <p>Title: FileUtil</p>
+ * <p>Description: 常用工具集合，Object的判空，唯一id的生成，证件脱敏。。</p>
  * <p>Copyright: Copyright (c) 2019</p>
+ *
  * @author yuanhongwei
- * @version 1.0
+ * @version 1.0 2019-6-30 下午6:48:33 【初版】
  */
 public class ObjUtils {
 
@@ -23,12 +24,13 @@ public class ObjUtils {
     private static final String STRING = "java.lang.String";
     private static final String DATE = "java.util.Date";
     private static final String LONG = "java.lang.Long";
+
     /**
      * 对象非空判断 空为true
-     *OoOo
+     * OoOo
+     *
      * @param
      * @return
-     * @author yuanhongwei
      */
     public static boolean isEmpty(Object obj) {
         return ObjectUtils.isEmpty(obj);
@@ -65,7 +67,7 @@ public class ObjUtils {
      */
     public static boolean collectionIsNull(Object collection) {
         boolean isNull = false;
-        if(isEmpty(collection)){
+        if (isEmpty(collection)) {
             isNull = true;
             return isNull;
         }
@@ -192,7 +194,7 @@ public class ObjUtils {
                 Field f = cz.getDeclaredField(key.trim());
                 Type t = f.getGenericType();
                 String mdName = toUpperCaseFirstOne(key);
-                switch (t.getTypeName()){
+                switch (t.getTypeName()) {
                     case STRING:
                         targetMtd = clazz.getClass().getMethod("set" + mdName, String.class);
                         targetMtd.invoke(clazz, nFiled.get(key));
@@ -213,71 +215,75 @@ public class ObjUtils {
             }
         }
     }
+
     //首字母转小写
-    public static String toLowerCaseFirstOne(String s){
-        if(Character.isLowerCase(s.charAt(0)))
+    public static String toLowerCaseFirstOne(String s) {
+        if (Character.isLowerCase(s.charAt(0)))
             return s;
         else
             return (new StringBuilder()).append(Character.toLowerCase(s.charAt(0))).append(s.substring(1)).toString();
     }
 
     //首字母转大写
-    public static String toUpperCaseFirstOne(String s){
-        if(Character.isUpperCase(s.charAt(0)))
+    public static String toUpperCaseFirstOne(String s) {
+        if (Character.isUpperCase(s.charAt(0)))
             return s;
         else
             return (new StringBuilder()).append(Character.toUpperCase(s.charAt(0))).append(s.substring(1)).toString();
     }
 
     /**
-	 * 获取请求流水号
-	 * @return String
-	 */
-	public static String generateRequestId() {
-		Date currentTime = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-		String dateString = formatter.format(currentTime);
-		return "Request" + dateString + getRandom();
-	}
+     * 获取请求流水号
+     *
+     * @return String
+     */
+    public static String generateRequestId() {
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+        String dateString = formatter.format(currentTime);
+        return "Request" + dateString + getRandom();
+    }
 
-	/**
-	 * 获取随机数:线程编号+随机数共10位
-	 * @return String
-	 */
-	public static String getRandom() {
-		String randStr = "";
-		String threadId = String.valueOf(Thread.currentThread().getId());
-		int len = threadId.length();
-		if (len >= 10)
-			threadId = threadId.substring(len - 10);
-		else {
-			for (int i = 0; i < 10 - len; i++) {
-				randStr = randStr + (int) (Math.random() * 10.0D);
-			}
-		}
-		return threadId + randStr;
-	}
-	
-	public static String fillResMsg(String resMsg, String... params) {
-		if (params == null || params.length == 0) {
-			return resMsg;
-		}
-		for (String param : params) {
-			resMsg = resMsg.replaceFirst("\\#\\?", param);
-		}
-		return resMsg;
-	}
+    /**
+     * 获取随机数:线程编号+随机数共10位
+     *
+     * @return String
+     */
+    public static String getRandom() {
+        String randStr = "";
+        String threadId = String.valueOf(Thread.currentThread().getId());
+        int len = threadId.length();
+        if (len >= 10)
+            threadId = threadId.substring(len - 10);
+        else {
+            for (int i = 0; i < 10 - len; i++) {
+                randStr = randStr + (int) (Math.random() * 10.0D);
+            }
+        }
+        return threadId + randStr;
+    }
 
-	/**
-	 * 操作类内部流水号，用于追溯业务调用流程
-	 * @return
-	 */
-	public static String generateSerialNum() {
-		Date currentTime = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-		String dateString = formatter.format(currentTime);
-		return "SYS" + dateString + getRandom();
-	}
+    public static String fillResMsg(String resMsg, String... params) {
+        if (params == null || params.length == 0) {
+            return resMsg;
+        }
+        for (String param : params) {
+            resMsg = resMsg.replaceFirst("\\#\\?", param);
+        }
+        return resMsg;
+    }
+
+    /**
+     * 操作类内部流水号，用于追溯业务调用流程
+     *
+     * @return
+     */
+    public static String generateSerialNum() {
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+        String dateString = formatter.format(currentTime);
+        return "SYS" + dateString + getRandom();
+    }
 
 }
 

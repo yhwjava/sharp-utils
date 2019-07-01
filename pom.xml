@@ -6,7 +6,7 @@
 
 	<groupId>com.sharp</groupId>
 	<artifactId>sharp-utils</artifactId>
-	<version>1.1.0</version>
+	<version>1.2.0</version>
 	<packaging>jar</packaging>
 	
 	<name>sharp-utils</name>
@@ -81,6 +81,17 @@
 			<version>1.8</version>
 		</dependency>
 		<!--ssh end-->
+		<!--redisson start-->
+		<dependency>
+			<groupId>org.redisson</groupId>
+			<artifactId>redisson</artifactId>
+			<version>3.10.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<!--redisson end-->
 	</dependencies>
 
 	<!--<build>
