@@ -1,6 +1,6 @@
 package com.sharp.utils.linux.model;
 
-import com.sharp.utils.ObjUtils;
+import com.sharp.utils.ObjUtil;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -111,7 +111,7 @@ public class TcpState implements Serializable{
 	}
 
 	public String getDateStr() {
-		if(!ObjUtils.isEmpty(dateStr)&&dateStr.length()>16){
+		if(!ObjUtil.isEmpty(dateStr)&&dateStr.length()>16){
 			return dateStr.substring(5);
 		}
 		return dateStr;

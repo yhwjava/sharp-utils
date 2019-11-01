@@ -56,6 +56,8 @@ public class LinuxCmd {
 	public static final String crontab = "cat /etc/crontab";//查看计划任务
 	
 	public static final String promisc = "ip link | grep promisc";//检查网络：ip link | grep PROMISC（正常网卡不该在promisc模式，可能存在sniffer）
-	
-	
+
+	public static final String cpuMax = "ps -auxf | sort -nr -k 3 | head -20";//占用 CPU 资源最多的前 20 个进程
+
+	public static final String memMax = "ps -auxf | sort -nr -k 4 | head -20";//占用 内存 资源最多的前 20 个进程
 }

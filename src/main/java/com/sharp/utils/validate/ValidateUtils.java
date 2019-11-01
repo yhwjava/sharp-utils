@@ -321,7 +321,7 @@ public class ValidateUtils {
      * @param value 校验对象
      * @return ValidateUtils
      */
-    public static ValidateUtils check(Object value) {
+    public static ValidateUtils check(Object value) throws Exception {
         ValidateUtils validateUtils = new ValidateUtils(value);
         validateUtils.notNull();
         Class classType = value.getClass();
@@ -342,12 +342,7 @@ public class ValidateUtils {
             if (CommonUtil.isNull(annotations)) {
                 return validateUtils;
             }
-            Object fieldValue;
-            try {
-                fieldValue = PropertyUtils.getProperty(value, field.getName());
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            Object fieldValue = PropertyUtils.getProperty(value, field.getName());
             for (Annotation annotation : annotations) {
                 if (annotation instanceof NotNull) {
                     validateUtils.and(fieldValue).notNull(((NotNull) annotation).msg());

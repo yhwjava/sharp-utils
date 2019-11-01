@@ -2,7 +2,7 @@ package com.sharp.utils.linux.model;
 
 
 import com.sharp.utils.DateUtil;
-import com.sharp.utils.ObjUtils;
+import com.sharp.utils.ObjUtil;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -98,8 +98,8 @@ public class AppState implements Serializable{
 	}
 
 	public String getDateStr() {
-		String str = DateUtil.getDateTimeString(createTime);
-		if(!ObjUtils.isEmpty(str)&&str.length()>16){
+		String str = DateUtil.parseDateToStr(createTime,DateUtil.yyyyMMddHHmmss);
+		if(!ObjUtil.isEmpty(str)&&str.length()>16){
 			return str.substring(5);
 		}
 		return dateStr;
