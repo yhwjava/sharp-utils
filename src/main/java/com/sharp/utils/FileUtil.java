@@ -294,6 +294,27 @@ public class FileUtil {
     }
 
     /**
+     * 删除文件
+     *
+     * @param myDelFile 文件
+     * @return Boolean 成功删除返回true遭遇异常返回false
+     */
+    public static boolean delFile(File myDelFile) {
+        boolean bea = false;
+        try {
+            if (myDelFile.exists()) {
+                myDelFile.delete();
+                bea = true;
+            } else {
+                bea = false;
+            }
+        } catch (Exception e) {
+            logger.error("删除文件操作出错！", e);
+        }
+        return bea;
+    }
+
+    /**
      * 删除文件夹
      *
      * @param folderPath 文件夹完整绝对路径
@@ -368,6 +389,36 @@ public class FileUtil {
             if (oldfile.exists()) {
                 // 读入原文件
                 InputStream inStream = new FileInputStream(oldPathFile);
+                FileOutputStream fs = new FileOutputStream(newPathFile);
+                byte[] buffer = new byte[1444];
+                while ((byteread = inStream.read(buffer)) != -1) {
+                    // 字节数 文件大小
+                    bytesum += byteread;
+                    fs.write(buffer, 0, byteread);
+                }
+                inStream.close();
+            }
+        } catch (Exception e) {
+            logger.error("复制单个文件操作出错!", e);
+        }
+    }
+
+
+    /**
+     * 复制单个文件
+     *
+     * @param oldFile 准备复制的文件
+     * @param newPathFile 拷贝到新绝对路径带文件名
+     * @return
+     */
+    public static void copyFile(File oldFile, String newPathFile) {
+        try {
+            int bytesum = 0;
+            int byteread = 0;
+            // 文件存在时
+            if (oldFile.exists()) {
+                // 读入原文件
+                InputStream inStream = new FileInputStream(oldFile);
                 FileOutputStream fs = new FileOutputStream(newPathFile);
                 byte[] buffer = new byte[1444];
                 while ((byteread = inStream.read(buffer)) != -1) {
@@ -464,6 +515,18 @@ public class FileUtil {
     public static void moveFile(String oldPath, String newPath) {
         copyFile(oldPath, newPath);
         delFile(oldPath);
+    }
+
+    /**
+     * 移动文件
+     *
+     * @param oldFile
+     * @param newPath
+     * @return
+     */
+    public static void moveFile(File oldFile, String newPath) {
+        copyFile(oldFile,newPath);
+        delFile(oldFile);
     }
 
     /**

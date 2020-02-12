@@ -1,6 +1,6 @@
 package com.sharp.utils.printparam;
 
-import com.sharp.utils.ObjUtils;
+import com.sharp.utils.ObjUtil;
 import com.sharp.utils.printparam.starter.PrintParamProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,10 +30,10 @@ public class ParamFilter implements Filter {
     public ParamFilter(PrintParamProperties properties) {
         this.properties = properties;
     }
-
+    @Override
     public void init(FilterConfig filterConfig) {
     }
-
+    @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         if (properties == null) {
             properties = new PrintParamProperties();
@@ -45,7 +45,7 @@ public class ParamFilter implements Filter {
         } else {
             ParamRequestWrapper requestWrapper = new ParamRequestWrapper((HttpServletRequest) servletRequest);
             
-            String random = ObjUtils.getRandom();
+            String random = ObjUtil.getRandom();
             if (properties.getEnableInputParam()) {
                 String path = r.getQueryString();
                 if (path == null) {
@@ -96,7 +96,7 @@ public class ParamFilter implements Filter {
             }
         }
     }
-
+    @Override
     public void destroy() {
     }
 

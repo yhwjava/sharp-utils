@@ -13,12 +13,37 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
         prefix = "print-param"
 )
 public class PrintParamProperties {
+    private boolean enablePrint = false;
     private boolean enableInputParam = true;
     private boolean enableOutputResult = true;
     private String filterIncludePattern = "/*";
     private String filterExcludePattern = "(/webjars/.*|/css/.*|/images/.*|/fonts/.*|/js/.*)";
 
     public PrintParamProperties() {
+    }
+
+    public boolean isEnablePrint() {
+        return enablePrint;
+    }
+
+    public void setEnablePrint(boolean enablePrint) {
+        this.enablePrint = enablePrint;
+    }
+
+    public boolean isEnableInputParam() {
+        return enableInputParam;
+    }
+
+    public void setEnableInputParam(boolean enableInputParam) {
+        this.enableInputParam = enableInputParam;
+    }
+
+    public boolean isEnableOutputResult() {
+        return enableOutputResult;
+    }
+
+    public void setEnableOutputResult(boolean enableOutputResult) {
+        this.enableOutputResult = enableOutputResult;
     }
 
     public Boolean getEnableInputParam() {

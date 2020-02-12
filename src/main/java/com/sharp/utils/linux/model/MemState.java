@@ -1,79 +1,76 @@
 package com.sharp.utils.linux.model;
 
-import com.sharp.utils.ObjUtils;
+import com.sharp.utils.ObjUtil;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- *
- * @ClassName:MemState.java     
- * @version V1.0 
- * @author: wgcloud     
+ * @version V1.0
+ * @ClassName:MemState.java
+ * @author: wgcloud
  * @date: 2019年1月14日
  * @Description: 查看内存使用情况
  * @Copyright: 2019 wgcloud. All rights reserved.
- *
  */
-public class MemState implements Serializable{
-	
+public class MemState implements Serializable {
 
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -1412473355088780549L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -1412473355088780549L;
 
-	/**
-	 * 主键
-	 */
-	private String id;
-	
-	/**
-	 * 用户id
-	 */
-	private String accountId;
-	
-	/**
-	 * 用户帐号
-	 */
-	private String account;
-	
-	/**
-	 * host名称
-	 */
-	private String hostname;
+    /**
+     * 主键
+     */
+    private String id;
 
-	/**
-	 * 总计内存，M
-	 */
+    /**
+     * 用户id
+     */
+    private String accountId;
+
+    /**
+     * 用户帐号
+     */
+    private String account;
+
+    /**
+     * host名称
+     */
+    private String hostname;
+
+    /**
+     * 总计内存，M
+     */
     private String total;
 
     /**
-	 *已使用多少，M
-	 */
+     * 已使用多少，M
+     */
     private String used;
-    
+
     /**
-	 * 未使用，M
-	 */
+     * 未使用，M
+     */
     private String free;
-    
+
     /**
      * 已使用百分比%
      */
     private String usePer;
-    
+
     /**
      * 添加时间
      * yyyy-MM-dd hh:mm:ss
      */
     private String dateStr;
-    
+
     /**
      * 创建时间
      */
-    private Date createTime; 
+    private Date createTime;
 
     public String getId() {
         return id;
@@ -83,84 +80,82 @@ public class MemState implements Serializable{
         this.id = id == null ? null : id.trim();
     }
 
-    
-    
-	public String getTotal() {
-		return total;
-	}
 
-	public void setTotal(String total) {
-		this.total = total;
-	}
+    public String getTotal() {
+        return total;
+    }
 
-	public String getUsed() {
-		return used;
-	}
+    public void setTotal(String total) {
+        this.total = total;
+    }
 
-	public void setUsed(String used) {
-		this.used = used;
-	}
+    public String getUsed() {
+        return used;
+    }
 
-	public String getFree() {
-		return free;
-	}
+    public void setUsed(String used) {
+        this.used = used;
+    }
 
-	public void setFree(String free) {
-		this.free = free;
-	}
+    public String getFree() {
+        return free;
+    }
 
-	
-	public Date getCreateTime() {
-		return createTime;
-	}
+    public void setFree(String free) {
+        this.free = free;
+    }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
 
-	public String getDateStr() {
-		if(!ObjUtils.isEmpty(dateStr)&&dateStr.length()>16){
-			return dateStr.substring(5);
-		}
-		return dateStr;
-	}
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-	public void setDateStr(String dateStr) {
-		this.dateStr = dateStr;
-	}
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-	public String getAccountId() {
-		return accountId;
-	}
+    public String getDateStr() {
+        if (!ObjUtil.isEmpty(dateStr) && dateStr.length() > 16) {
+            return dateStr.substring(5);
+        }
+        return dateStr;
+    }
 
-	public void setAccountId(String accountId) {
-		this.accountId = accountId;
-	}
+    public void setDateStr(String dateStr) {
+        this.dateStr = dateStr;
+    }
 
-	public String getAccount() {
-		return account;
-	}
+    public String getAccountId() {
+        return accountId;
+    }
 
-	public void setAccount(String account) {
-		this.account = account;
-	}
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
 
-	public String getHostname() {
-		return hostname;
-	}
+    public String getAccount() {
+        return account;
+    }
 
-	public void setHostname(String hostname) {
-		this.hostname = hostname;
-	}
+    public void setAccount(String account) {
+        this.account = account;
+    }
 
-	public String getUsePer() {
-		return usePer;
-	}
+    public String getHostname() {
+        return hostname;
+    }
 
-	public void setUsePer(String usePer) {
-		this.usePer = usePer;
-	}
+    public void setHostname(String hostname) {
+        this.hostname = hostname;
+    }
 
-	
-   
+    public String getUsePer() {
+        return usePer;
+    }
+
+    public void setUsePer(String usePer) {
+        this.usePer = usePer;
+    }
+
+
 }

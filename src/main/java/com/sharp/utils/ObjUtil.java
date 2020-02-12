@@ -1,5 +1,7 @@
 package com.sharp.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.ObjectUtils;
 
 import java.lang.reflect.Field;
@@ -16,7 +18,8 @@ import java.util.*;
  * @author yuanhongwei
  * @version 1.0 2019-6-30 下午6:48:33 【初版】
  */
-public class ObjUtils {
+public class ObjUtil {
+    private static final Logger logger = LoggerFactory.getLogger(ObjUtil.class);
 
     private static String serialVersionUID = "serialVersionUID";
     private static final String GET = "get";
@@ -24,6 +27,43 @@ public class ObjUtils {
     private static final String STRING = "java.lang.String";
     private static final String DATE = "java.util.Date";
     private static final String LONG = "java.lang.Long";
+
+
+    /**
+     * 清空类中所有属性值
+     *
+     * @param obj
+     */
+    public static void setObjectFieldsEmpty(Object obj) {
+        // 对obj反射
+        Class objClass = obj.getClass();
+        Method[] objmethods = objClass.getDeclaredMethods();
+        Map objMeMap = new HashMap();
+        for (int i = 0; i < objmethods.length; i++) {
+            Method method = objmethods[i];
+            objMeMap.put(method.getName(), method);
+        }
+        for (int i = 0; i < objmethods.length; i++) {
+            {
+                String methodName = objmethods[i].getName();
+                if (methodName != null && methodName.startsWith("get")) {
+                    try {
+                        Object returnObj = objmethods[i].invoke(obj,
+                                new Object[0]);
+                        Method setmethod = (Method) objMeMap.get("set"
+                                + methodName.split("get")[1]);
+                        if (returnObj != null) {
+                            returnObj = null;
+                        }
+                        setmethod.invoke(obj, returnObj);
+                    } catch (Exception e) {
+                        logger.error("清空类中所有属性值", e);
+                    }
+                }
+            }
+
+        }
+    }
 
     /**
      * 对象非空判断 空为true
@@ -161,7 +201,7 @@ public class ObjUtils {
      * @author yuanhongwei
      */
     public static String certificatesDesensitization(Boolean isIDCert, String certNumb) {
-        if (ObjUtils.isEmpty(certNumb)) {
+        if (ObjUtil.isEmpty(certNumb)) {
             return certNumb;
         }
         if (isIDCert && certNumb.length() >= 15) {
@@ -211,25 +251,28 @@ public class ObjUtils {
 
 
             } catch (Exception e) {
-                System.out.println(e);
+                logger.error("覆盖部分属性", e);
             }
         }
     }
 
     //首字母转小写
     public static String toLowerCaseFirstOne(String s) {
-        if (Character.isLowerCase(s.charAt(0)))
+        if (Character.isLowerCase(s.charAt(0))) {
             return s;
-        else
-            return (new StringBuilder()).append(Character.toLowerCase(s.charAt(0))).append(s.substring(1)).toString();
+        } else {
+            return new StringBuilder().append(Character.toLowerCase(s.charAt(0))).append(s.substring(1)).toString();
+        }
     }
 
     //首字母转大写
     public static String toUpperCaseFirstOne(String s) {
-        if (Character.isUpperCase(s.charAt(0)))
+        if (Character.isUpperCase(s.charAt(0))) {
             return s;
-        else
+        } else {
             return (new StringBuilder()).append(Character.toUpperCase(s.charAt(0))).append(s.substring(1)).toString();
+        }
+
     }
 
     /**
@@ -253,9 +296,9 @@ public class ObjUtils {
         String randStr = "";
         String threadId = String.valueOf(Thread.currentThread().getId());
         int len = threadId.length();
-        if (len >= 10)
+        if (len >= 10) {
             threadId = threadId.substring(len - 10);
-        else {
+        } else {
             for (int i = 0; i < 10 - len; i++) {
                 randStr = randStr + (int) (Math.random() * 10.0D);
             }

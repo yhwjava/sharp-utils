@@ -156,7 +156,7 @@ public class LockAop {
                     Object obj = proceedingJoinPoint.proceed();
                     return obj;
                 }else{
-                    throw new LockException("获取锁失败");
+//                    throw new LockException("获取锁失败");
                 }
             } finally {
             	if (res) {
@@ -164,6 +164,8 @@ public class LockAop {
             	}
             }
         }
-        throw new LockException("获取锁失败");
+        log.info("获取锁失败");
+//        throw new LockException("获取锁失败");
+        return null;
     }
 }
